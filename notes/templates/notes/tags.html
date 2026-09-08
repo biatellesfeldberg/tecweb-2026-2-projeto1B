@@ -1,0 +1,35 @@
+{% extends "notes/base.html" %}
+{% load static %}
+
+{% block content %}
+    <div class="appbar">
+      <img src="{% static 'notes/img/logo-getit.png' %}" class="logo" />
+      <span class="subtitle">Como o Post-it, mas com outro verbo</span>
+      <a href="/" class="appbar-link">Início</a>
+    </div>
+
+    <main class="container">
+      <table class="tags-table">
+        <thead>
+          <tr>
+            <th>TAG</th>
+            <th>ANOTAÇÕES</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for tag in tags %}
+          <tr>
+            <td>
+              <a href="{% url 'tag_detail' id=tag.id %}">#{{ tag.name }}</a>
+            </td>
+            <td>
+              <a href="{% url 'tag_detail' id=tag.id %}" class="tag-notes-link">
+                <span class="material-icons">attach_file</span>
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </main>
+{% endblock %}

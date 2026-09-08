@@ -71,6 +71,7 @@ body {
 
 /* Estilos compartilhados pelos campos do formulário */
 .form-card-title,
+.form-card-tag,
 .autoresize {
   padding: 5px;
   border: none;
@@ -89,6 +90,35 @@ body {
 .autoresize {
   min-height: 35px;
   margin-top: 7px;
+  font-size: 15px;
+}
+
+.form-card-tag {
+  margin-top: 7px;
+  font-size: 15px;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  background: transparent;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.form-card-tag:focus,
+.form-card-tag:focus-visible {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.appbar-link {
+  margin-left: auto;
+  margin-right: 16px;
+  padding: 8px 18px;
+  background-color: #2c2c2c;
+  color: #f7d736;
+  text-decoration: none;
+  border-radius: 2px;
   font-size: 15px;
 }
 
@@ -219,7 +249,7 @@ a.btn {
 .card {
   position: relative;
   width: 220px;
-  height: 120px;
+  height: 150px;
   padding: 14px;
   display: flex;
   flex-direction: column;
@@ -292,6 +322,56 @@ a.btn {
 .card-content p {
   margin: 0;
   max-width: 100%;
+}
+
+/* Tag exibida no canto do card */
+.card-tag {
+  margin-top: auto;
+  align-self: flex-start;
+  padding: 2px 8px;
+  background-color: #f7d736;
+  font-size: 13px;
+  color: #2c2c2c;
+}
+
+/* Tabela da lista de tags */
+.tags-table {
+  width: 540px;
+  margin: 0 auto;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+}
+
+.tags-table th,
+.tags-table td {
+  padding: 14px 18px;
+  text-align: left;
+  font-size: 15px;
+}
+
+.tags-table th {
+  border-bottom: 1px solid #d0d0d0;
+  font-weight: bold;
+}
+
+.tags-table tr:nth-child(even) {
+  background-color: #f5f5f5;
+}
+
+.tags-table a {
+  color: #2c2c2c;
+  text-decoration: none;
+}
+
+.tag-notes-link {
+  display: inline-flex;
+  align-items: center;
+  color: #4c4c4c;
+}
+
+.tag-notes-link .material-icons {
+  font-size: 20px;
 }
 
 /* Cores de cada card

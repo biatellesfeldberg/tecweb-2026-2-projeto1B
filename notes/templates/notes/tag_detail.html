@@ -9,28 +9,6 @@
     </div>
 
     <main class="container">
-      <form class="form-card" method="post">
-        {% csrf_token %}
-        <input
-          class="form-card-title"
-          type="text"
-          name="titulo"
-          placeholder="Título"
-        />
-        <textarea
-          class="autoresize"
-          name="detalhes"
-          placeholder="Digite o conteúdo..."
-        ></textarea>
-        <input
-          class="form-card-title form-card-tag"
-          type="text"
-          name="tag"
-          placeholder="Adicione uma tag"
-        />
-        <button class="btn" type="submit">Criar</button>
-      </form>
-
       <div class="card-container">
         {% for note in notes %}
         <div class="card">
