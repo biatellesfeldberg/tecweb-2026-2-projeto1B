@@ -27,10 +27,10 @@
       <div class="card-container">
         {% for note in notes %}
         <div class="card">
-          <a href="/edit/{{ note.id }}" class="card-edit">
+          <a href="{% url 'edit' id=note.id %}" class="card-edit">
             <span class="material-icons">edit</span>
           </a>
-          <a href="/delete/{{ note.id }}" class="card-remove">
+          <a href="{% url 'delete' id=note.id %}" class="card-remove">
             <span class="material-icons">delete</span>
           </a>
           <h3 class="card-title">{{ note.title }}</h3>
