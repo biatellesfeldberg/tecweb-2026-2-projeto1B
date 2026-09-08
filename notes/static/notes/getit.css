@@ -25,7 +25,8 @@ Algumas informações úteis e dicas:
 html,
 body {
   font-family: "Roboto", sans-serif;
-  color: #2c2c2c
+  color: #2c2c2c;
+  background-color: #ffffff;
 }
 
 /* Barra no topo da página */
@@ -111,14 +112,20 @@ body {
   box-shadow: none;
 }
 
-.appbar-link {
+a.appbar-link {
   margin-left: auto;
   margin-right: 16px;
-  padding: 8px 18px;
-  background-color: #2c2c2c;
-  color: #f7d736;
+  height: 34px;
+  padding: 0 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  color: #2c2c2c;
   text-decoration: none;
   border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+  font-family: "Roboto", sans-serif;
   font-size: 15px;
 }
 
@@ -324,54 +331,69 @@ a.btn {
   max-width: 100%;
 }
 
-/* Tag exibida no canto do card */
+/* Tag exibida no canto do card, com highlight amarelo */
 .card-tag {
   margin-top: auto;
   align-self: flex-start;
-  padding: 2px 8px;
+  display: inline-block;
+  padding: 4px 14px;
   background-color: #f7d736;
-  font-size: 13px;
+  border-radius: 999px;
+  font-family: "Permanent Marker", cursive;
+  font-size: 14px;
   color: #2c2c2c;
+  line-height: 1.2;
+  text-transform: uppercase;
 }
 
 /* Tabela da lista de tags */
 .tags-table {
-  width: 540px;
-  margin: 0 auto;
+  width: 80%;
+  max-width: 900px;
+  margin: 40px auto 0;
   border-collapse: collapse;
-  background-color: white;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+  border: 1px solid #e0e0e0;
 }
 
 .tags-table th,
 .tags-table td {
-  padding: 14px 18px;
-  text-align: left;
-  font-size: 15px;
+  padding: 16px 12px;
+  text-align: center;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .tags-table th {
-  border-bottom: 1px solid #d0d0d0;
-  font-weight: bold;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #2c2c2c;
+  background-color: #fafafa;
 }
 
-.tags-table tr:nth-child(even) {
-  background-color: #f5f5f5;
+.tags-table td {
+  font-size: 16px;
+}
+
+.tags-table tbody tr:nth-child(even) {
+  background-color: #f8f8f8;
 }
 
 .tags-table a {
   color: #2c2c2c;
   text-decoration: none;
+  font-weight: 700;
 }
 
 .tag-notes-link {
   display: inline-flex;
   align-items: center;
-  color: #4c4c4c;
+  justify-content: center;
 }
 
 .tag-notes-link .material-icons {
-  font-size: 20px;
+  font-size: 22px;
+  color: #757575;
+  font-weight: normal;
 }
 
 /* Cores de cada card
