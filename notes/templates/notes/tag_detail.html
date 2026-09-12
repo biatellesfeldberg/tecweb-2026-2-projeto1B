@@ -22,8 +22,12 @@
           <div class="card-content">
             <p>{{ note.content }}</p>
           </div>
-          {% if note.tag %}
-          <span class="card-tag">#{{ note.tag.name }}</span>
+          {% if note.tags.all %}
+          <div class="card-tags">
+            {% for tag in note.tags.all %}
+            <span class="card-tag">#{{ tag.name }}</span>
+            {% endfor %}
+          </div>
           {% endif %}
         </div>
         {% endfor %}

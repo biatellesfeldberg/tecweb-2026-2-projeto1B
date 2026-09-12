@@ -24,9 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-1s-8xj9swohrlo4^()fqp#cl-1cd)wx2p8o+dz)9gy)#^$#opp"
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# True para desenvolver localmente. Antes de fazer merge na main, volte para False.
 DEBUG = False
 
-ALLOWED_HOSTS = ALLOWED_HOSTS = ['tecweb-2026-2-projeto1b-x67a.onrender.com', 'localhost', '127.0.0.1', '0.0.0.0']
+ALLOWED_HOSTS = ['tecweb-2026-2-projeto1b-x67a.onrender.com', 'localhost', '127.0.0.1', '0.0.0.0']
 
 
 # Application definition
@@ -75,13 +76,22 @@ WSGI_APPLICATION = "getit.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 
-DATABASES = {
-    'default': dj_database_url.config(
-        default='postgresql://get_it_db_h79n_user:wNI770MLbveWVisNt9sRMWsJzOjO7Cvt@dpg-daim36gae00c73f2vm7g-a.oregon-postgres.render.com/get_it_db_h79n',
-        conn_max_age=600,
-        ssl_require=not DEBUG
-    )
-}
+# SQLite no computador. Em produção (DEBUG=False) usa o PostgreSQL do Render.
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+else:
+    DATABASES = {
+        'default': dj_database_url.config(
+            default='postgresql://get_it_db_h79n_user:wNI770MLbveWVisNt9sRMWsJzOjO7Cvt@dpg-daim36gae00c73f2vm7g-a.oregon-postgres.render.com/get_it_db_h79n',
+            conn_max_age=600,
+            ssl_require=True
+        )
+    }
 
 
 # Password validation

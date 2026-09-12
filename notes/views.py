@@ -3,47 +3,49 @@ from django.shortcuts import render, redirect
 # Create your views here.
 from .models import Note, Tag
 
-def obter_tag(nome):
-    if not nome:
-        return None
 
-    nome = nome.strip()
-    if nome == '':
-        return None
+def obter_tags(nomes):
+    tags = []
+    if not nomes:
+        return tags
 
-    try:
-        # Buscando a tag no banco de dados
-        tag = Tag.objects.get(name=nome)
-    except Tag.DoesNotExist:
-        # Criando uma nova tag no banco de dados
-        tag = Tag(name=nome)
-        tag.save()
+    for nome in nomes.split(','):
+        nome = nome.strip()
+        if nome == '':
+            continue
 
-    return tag
+        tag, created = Tag.objects.get_or_create(name=nome)
+        tags.append(tag)
+
+    return tags
+
 
 def index(request):
     if request.method == 'POST':
         title = request.POST.get('titulo')
         content = request.POST.get('detalhes')
-        nome_tag = request.POST.get('tag')
+        nomes_tags = request.POST.get('tag')
 
-        # Buscando a tag existente ou criando uma nova
-        tag = obter_tag(nome_tag)
-
-        # Criando uma anotação e vinculando à tag
-        note = Note(title=title, content=content, tag=tag)
+        # A nota precisa ser salva antes de associar tags (ManyToMany)
+        note = Note(title=title, content=content)
         note.save()
 
+        tags = obter_tags(nomes_tags)
+        if tags:
+            note.tags.add(*tags)
+
         return redirect('index')
-    
+
     else:
         all_notes = Note.objects.all()
         return render(request, 'notes/index.html', {'notes': all_notes})
+
 
 def delete(request, id):
     note = Note.objects.get(id=id)
     note.delete()
     return redirect('index')
+
 
 def edit(request, id):
     note = Note.objects.get(id=id)
@@ -51,19 +53,23 @@ def edit(request, id):
     if request.method == 'POST':
         note.title = request.POST.get('titulo')
         note.content = request.POST.get('detalhes')
-        nome_tag = request.POST.get('tag')
-
-        # Buscando a tag existente ou criando uma nova
-        tag = obter_tag(nome_tag)
-        note.tag = tag
         note.save()
+
+        tags = obter_tags(request.POST.get('tag'))
+        note.tags.set(tags)
         return redirect('index')
 
-    return render(request, 'notes/edit.html', {'note': note})
+    tags_value = ', '.join(tag.name for tag in note.tags.all())
+    return render(request, 'notes/edit.html', {
+        'note': note,
+        'tags_value': tags_value,
+    })
+
 
 def tags(request):
     all_tags = Tag.objects.all()
     return render(request, 'notes/tags.html', {'tags': all_tags})
+
 
 def tag_detail(request, id):
     # Buscando a tag no banco de dados
